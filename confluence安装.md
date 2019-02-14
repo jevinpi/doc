@@ -1,5 +1,4 @@
 # <center>centos下confluence的安装</center>
-[TOC]
 
 ## 环境
 * centos7
@@ -17,12 +16,16 @@
 2. 文件授权：`chmod +x atlassian-confluence-6.7.1-x64.bin`
 3. 安装文件：`./atlassian-confluence-6.7.1-x64.bin`
    安装过程中可以根据自己情况选择安装模式，设置端口
+   
    ![](./imgs/img1.png)
+
 4. 安装完成打开`http://localhost:8090`，记下填写授权码时的服务器ID
+   
    ![](imgs/img2.png)
    ![](imgs/img3.png)
    ![](imgs/img4.png)
    ![](imgs/img5.png)
+
 5. 安装目录：`/opt/atlassian/confluence`
 6. 数据目录：`/var/atlassian/application-data/confluence`
 
@@ -32,7 +35,9 @@
 3. [下载注册机](https://pan.baidu.com/s/18puVreLymtLHVtsg0R0bLQ)
 4. 解压下载的文件，解压其中的`confluence5.1-crack.zip`文件，并且dos进入`iNViSiBLE`目录
 5. 执行`java -jar confluence_keygen.jar`
+   
    ![](./imgs/img6.png)
+
 6. Name随便填写，Server ID是刚刚记下的服务器ID
 7. 点击`.gen!`生成授权码
 8. 点击`.patch`，选择`atlassian-extras-2.4.jar`文件，左下角提示success则是破解成功，生成的bak文件不用管
