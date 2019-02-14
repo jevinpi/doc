@@ -8,7 +8,7 @@
 ## 下载
 1. [mysql驱动](https://pan.baidu.com/s/1OCqciR7OxUThaleZyRL9NA)
 2. confluence安装包
-   * [网盘下载]()
+   * [网盘下载](https://pan.baidu.com/s/1SI6JbysZLvm32YZWTx04vw)
    * `wget https://downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-6.7.1-x64.bin -P /opt`
 
 ## 安装
