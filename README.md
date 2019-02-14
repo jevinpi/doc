@@ -1,2 +1,5 @@
 # doc
-文档
+常用的一些安装文档，已踩坑
+
+## confluence安装
+[confluence安装手册](confluence.md)
