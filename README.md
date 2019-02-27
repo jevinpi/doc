@@ -7,3 +7,6 @@
 
 ### gitlab安装与迁移
 [Gitlab安装与迁移](./tools/gitlab.md)
+
+### mysql安装
+[mysql安装](./tools/mysql.md)
