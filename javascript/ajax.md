@@ -19,7 +19,7 @@ xmlhttp.open("GET","test1.txt",true);
 xmlhttp.send();
 ```
 ## 服务器响应
-获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。
+获得来自服务器的响应，请使用XMLHttpRequest 对象的 responseText 或 responseXML 属性。
 ```
 console.log(XMLHttpRequest.responseText, XMLHttpRequest.responseXML)
 responseText:：获得字符串形式的响应数据
