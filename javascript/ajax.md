@@ -2,7 +2,7 @@
 所有现代浏览器均支持 XMLHttpRequest 对象（IE5 和 IE6 使用 ActiveXObject）。
 ## 创建 XMLHttpRequest 对象
 所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。
-```
+```javascript
 var xmlhttp;
 if (window.XMLHttpRequest) {
   // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -14,13 +14,13 @@ if (window.XMLHttpRequest) {
 ```
 ## 向服务器发送请求
 如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open() 和 send() 方法：
-```
+```javascript
 xmlhttp.open("GET","test1.txt",true);
 xmlhttp.send();
 ```
 ## 服务器响应
 获得来自服务器的响应，请使用XMLHttpRequest 对象的 responseText 或 responseXML 属性。
-```
+```javascript
 console.log(XMLHttpRequest.responseText, XMLHttpRequest.responseXML)
 responseText:：获得字符串形式的响应数据
 responseXML：获得XML形式的响应数据
