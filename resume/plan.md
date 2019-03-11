@@ -1,5 +1,5 @@
-- [] Redux
-- [] orm
-- [] webapp
-- [] nestjs
-- [] python
+- [ ] Redux
+- [ ] orm
+- [ ] webapp
+- [ ] nestjs
+- [ ] python
