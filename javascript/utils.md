@@ -58,7 +58,7 @@ const getCookie = (c_name) => {
 ## 深克隆对象
 ```javascript
 /**
- * 避免内存指向的问题，对象使用深克隆
+ * 避免内存指向的问题，深克隆对象
  * @param {*} obj  需要克隆的对象
  * @param {Array<Object>} cache 用来缓存已克隆的内容，默认为空，调用函数时不传，递归时使用
  * @return {*}
