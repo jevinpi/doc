@@ -1,9 +1,9 @@
 - [ ] Redux
 - [ ] nuxtjs
-- [ ] orm
+- [ ] mongodb
+- [ ] mysql
+- [ ] typeorm
+- [ ] koa middleware
 - [ ] webapp
 - [ ] nestjs
 - [ ] python
-- [ ] mongodb
-- [ ] mysql
-- [ ] orm
