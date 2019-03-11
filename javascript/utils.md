@@ -63,6 +63,10 @@ const getCookie = (c_name) => {
  * @param {Array<Object>} cache 用来缓存已克隆的内容，默认为空，调用函数时不传，递归时使用
  * @return {*}
  */
+function find (list, f) {
+  return list.filter(f)[0]
+}
+
 function deepCopy (obj, cache = []) {
   // 类型不是object直接返回原值
   if (obj === null || typeof obj !== 'object') {
