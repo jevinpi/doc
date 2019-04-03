@@ -1,9 +1,17 @@
+- [ ] React
 - [ ] Redux
-- [ ] nuxtjs
-- [ ] mongodb
-- [ ] mysql
-- [ ] typeorm
+- [ ] Taro
+- [ ] weapp
+- [ ] spider
+- [ ] resume
+- [ ] 机器人
 - [ ] koa middleware
-- [ ] webapp
+- [ ] koa2 CMS
+- [ ] blog
+- [ ] nuxtjs
+- [ ] mysql
+- [ ] mongodb
+- [ ] typeorm
+- [ ] redis
 - [ ] nestjs
 - [ ] python
