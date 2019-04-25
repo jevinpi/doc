@@ -1,5 +1,5 @@
-- [ ] React
-- [ ] Redux
+- [x] React
+- [x] Redux
 - [ ] Taro
 - [ ] weapp
 - [ ] spider
@@ -18,6 +18,7 @@
 - [ ] 微信开发
 
 ## project
-王者荣耀爬虫
-王者荣耀小程序
-react王者荣耀
+1. 王者荣耀爬虫
+2. 王者荣耀小程序
+3. react王者荣耀
+4. 英雄联盟
