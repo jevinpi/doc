@@ -74,7 +74,7 @@ Array       数组
 ```javascript
 const Schema = mongoose.Schema
 
-const Hero = new Schema({
+const HeroSchema = new Schema({
   name: String,
   title: String,
   age: Number,
@@ -83,7 +83,7 @@ const Hero = new Schema({
 ```
 如果需要在Schema定义后添加其他字段，可以使用add()方法
 ```
-Hero.add({ name: 'string', color: 'string', price: 'number' });
+HeroSchema.add({ name: 'string', color: 'string', price: 'number' });
 ```
 
 ## Model
@@ -91,7 +91,7 @@ Hero.add({ name: 'string', color: 'string', price: 'number' });
 
 Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为"MyModel"，则集合名称为"mymodels"；如果模型名称为"Model1"，则集合名称为"model1"。例如下面例子中最后的集合名称是"heros"
 ```
-let heroModel = mongoose.model('Hero', Hero)
+let heroModel = mongoose.model('Hero', HeroSchema)
 ```
 
 ## 文档新增
@@ -119,3 +119,175 @@ heroModel.create({name: 'test1'}, {name: 'test2'}, function (err, doc1,doc2))
 ```
 heroModel.create([{name: 'test1'}, {name: 'test2'}], function (err, docs))
 ```
+## 文档查询
+文档查询一般用的是以下三种方法和一种操作符，分别是：
+### find
+返回查找的全部符合数据
+第一个参数是条件，第二参数是输出字段，第三个参数是配置查询参数，第四个参数是回调函数.  
+> Model.find([conditions], [projection], [options], [callback])
+例子:
+```javascript
+//搜索名字为Akali且年龄大于等于18的所有数据，输出全部
+heroModel.find({name: 'Akali', age: {$gte: 18}}, function (err, docs) {} )
+//只输出name和_id字段
+heroModel.find({name: 'Akali', age: {$gte: 18}}, 'name', function (err, docs) {} )
+//无需输出id
+heroModel.find({name: 'Akali', age: {$gte: 18}}, {name: 1, _id: 0}, function (err, docs) {} )
+```
+
+### findById
+根据id查询
+> Model.findById(id, [projection], [options], [callback])
+```
+heroModel.findById('5cc7a6f615597c0ac40a549c,', function (err, docs) {} )
+```
+### findOne
+返回查找的第一个数据，其他使用与find一样
+> Model.findOne([conditions], [projection], [options], [callback])
+```javascript
+heroModel.findOne({name: 'Akali', age: {$gte: 18}}, function (err, docs) {} )
+```
+
+### $where
+复杂查询使用`$where`操作符，可以使用javascript语句作为查询的一部分
+```javascript
+heroModel.findOne({$where: 'this.age1==this.age2'}, function (err, docs) {} )
+```
+
+## 文档更新
+```js
+update()
+updateMany()
+find() + save()
+updateOne()
+findOne() + save()
+findByIdAndUpdate()
+fingOneAndUpdate()
+```
+
+### update
+第一个参数conditions为查询条件，第二个参数doc为需要修改的数据，第三个参数options为控制选项，第四个参数是回调函数
+> Model.update(conditions, doc, [options], [callback])
+`options`有以下选项
+```
+safe (boolean)： 默认为true。安全模式。
+upsert (boolean)： 默认为false。如果不存在则创建新记录。
+multi (boolean)： 默认为false。是否更新多个查询记录。
+runValidators： 如果值为true，执行Validation验证。
+setDefaultsOnInsert： 如果upsert选项为true，在新建时插入文档定义的默认值。
+strict (boolean)： 以strict模式进行更新。
+overwrite (boolean)： 默认为false。禁用update-only模式，允许覆盖记录。
+```
+例子：
+```js
+heroModel.update({name: 'Akali'}, {gae: 33}, {upsert : true}, cb)
+```
+
+### updateMany
+`updateMany`与update的区别就是更新多个文档，即使设置了{multi:false}也不起作用
+
+### find() + save()
+如果更新麻烦可以通过此方法联合使用，即先通过find查找，再保存。例子：
+```js
+heroModel.find({age: {$lt: 20}}, function(err, docs) {
+	docs.forEach(item => {
+		item.age += 10
+		item.save()
+	})
+})
+```
+同理，我们可以用`findOne() + save()`进行更新,也可以用扩展的`findOneAndUpdate`,`findByIdAndUpdate`进行更新
+
+### updateOne
+更新找到的第一条数据，后面数据不更新，用法与update一致
+
+### 文档删除
+文档删除有三种方式
+### remove
+remove有两种形式，一种是文档的remove()方法，一种是Model的remove()方法
+Model的remove，是删除所有满足条件的记录:
+```
+model.remove(conditions, [callback])
+```
+如果不想写回调函数的话，可以通过exec来代替，两者至少写一种，否则删除不会成功例子
+```
+heroModel.remove({name: 'Akali'}).exec()
+```
+文档的删除，则是删除该条记录，且回调可以省略，例子
+```
+heroModel.find({title: '战士'}).exec(function(err, docs) {
+  docs.forEach(val => {
+    val.remove()
+  })
+})
+```
+
+### findOneAndRemove
+查找符合条件的第一条记录并删除,与Model的remove一样，回调函数不可省略
+```
+Model.findOneAndRemove(conditions, [options], [callback])
+```
+
+### findByIdAndRemove
+查找符合id的记录并删除,与Model的remove一样，回调函数不可省略
+```
+Model.findByIdAndRemove(conditions, [options], [callback])
+```
+
+## 前后钩子
+前后钩子可以理解为
+前后钩子即pre()和post()方法，又称为中间件，是在执行某些操作时可以执行的函数。中间件在schema上指定，类似于静态方法或实例方法等。可以在数据库执行下列操作时，设置前后钩子
+```
+validate
+save
+remove
+count
+find
+findOne
+findOneAndRemove
+findOneAndUpdate
+insertMany
+update
+```
+### pre
+pre方法是指在执行操作之前执行的方法，之前以find方法为例，添加方法
+```js
+HeroSchema.pre('find', function(next) {
+	console.log('the first pre')
+	next()
+})
+HeroSchema.pre('find', function(next) {
+	console.log('the second pre')
+	next()
+})
+
+heroModel.find(function(err, docs) {
+	console.log('find finish')
+})
+// 调试信息顺序
+// the first pre
+// the second pre
+// find finish
+```
+
+### post
+post方法是指在执行某些操作前最后执行的方法，以find为例，添加方法
+```js
+HeroSchema.post('find', function() {
+	console.log('the first post')
+})
+HeroSchema.post('find', function() {
+	console.log('the second post')
+})
+
+heroModel.find(function(err, docs) {
+	console.log('find finish')
+})
+// 调试信息顺序
+// the first post
+// the second post
+// find finish
+```
+
+## 查询后处理
+
