@@ -30,6 +30,10 @@ class Lion extends Animal {
 function createInstance<A extends Animal>(c: new () => A): A {
     return new c();
 }
+// 另一种写法，效果一样
+// function createInstance<A extends Animal>(c: {new (): A}): A {
+//     return new c();
+// }
 
 createInstance(Lion).keeper.nametag;  // typechecks!
 createInstance(Bee).keeper.hasMask;   // typechecks!
